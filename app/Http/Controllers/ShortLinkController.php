@@ -26,7 +26,6 @@ class ShortLinkController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'jira_ticket' => 'required',
         'name' => 'required',
         'url_links' => 'required|url',
     ]);
