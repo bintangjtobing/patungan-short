@@ -25,9 +25,7 @@ jobs:
           composer install
           cp .env.production .env
           php artisan key:generate --ansi
-
-          - name: Install sshpass
-          run: sudo apt-get install -y sshpass
+          sudo apt-get install -y sshpass
 
       - name: Deploy to Production
         if: github.ref == 'refs/heads/main'
