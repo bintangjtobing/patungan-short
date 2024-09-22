@@ -1,0 +1,32 @@
+name: PatunganYuk ShortURL Deployment
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          composer install
+          cp .env.production .env
+          php artisan key:generate --ansi
+
+          - name: Install sshpass
+          run: sudo apt-get install -y sshpass
+
+      - name: Deploy to Production
+        if: github.ref == 'refs/heads/main'
+        run: |
+          sshpass -p 'LibrA21101998' rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" ./ patunganyuk@153.92.5.213:/home/patunganyuk/short.patunganyuk.com/
+          sshpass -p 'LibrA21101998' ssh -o StrictHostKeyChecking=no patunganyuk@153.92.5.213 'cd /home/patunganyuk/short.patunganyuk.com && php artisan key:generate --ansi && php artisan migrate --force && php artisan optimize:clear && php artisan config:clear'

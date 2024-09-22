@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "montserrat", sans-serif;
+}
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Membungkus teks agar tidak meluber */
+.table td {
+    word-wrap: break-word;
+    white-space: normal;
+    max-width: 100px; /* Atur sesuai kebutuhan */
+}
+
+/* Penyesuaian pada perangkat yang lebih kecil */
+@media (max-width: 576px) {
+    .table td {
+        font-size: 14px; /* Ukuran font lebih kecil */
+        max-width: 80px;  /* Lebar maksimal kolom pada layar kecil */
+    }
+
+    /* Button kecil untuk mobile */
+    .btn {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+}
+.text-primary {
+    color: #0b273d !important;
+}
